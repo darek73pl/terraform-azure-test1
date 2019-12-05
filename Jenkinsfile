@@ -8,6 +8,7 @@ pipeline {
     stages {
         stage ('terra-init'){
             steps {
+                echo '%Path%'
                 bat "terraform init"
             }
         }    
