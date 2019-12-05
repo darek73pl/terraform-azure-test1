@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage ('terra-init'){
             steps {
-                bat "${getTerraformPath()}\\terraform init"
+                bat "\"${getTerraformPath()}\\terraform\" init"
             }
         }    
     }
