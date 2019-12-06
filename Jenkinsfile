@@ -11,12 +11,19 @@ pipeline {
     stages {
         stage ('terra-init'){
             steps {
- 
-                bat "\"${getTerraformPath()}\\terraform\" init"
-                //bat "\"${getTerraformPath()}\\terraform\" plan"
+                 bat "\"${getTerraformPath()}\\terraform\" init"               
+            }
+        }
+        stage ('terra-plan') {
+            steps {
+                bat "\"${getTerraformPath()}\\terraform\" plan"
+            }
+        }  
+        stage ('terra-apply')  {
+            steps {
                 //bat "\"${getTerraformPath()}\\terraform\" apply -auto-approve" */
             }
-        }    
+        }
     }
 }
 
