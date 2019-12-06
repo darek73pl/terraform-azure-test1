@@ -19,11 +19,11 @@ pipeline {
                 bat "\"${getTerraformPath()}\\terraform\" plan"
             }
         }  
- /*       stage ('terra-apply') {
+        stage ('terra-apply') {
             steps {
-                //bat "\"${getTerraformPath()}\\terraform\" apply -auto-approve" 
+                bat "\"${getTerraformPath()}\\terraform\" apply -auto-approve" 
             }
-        } */
+        } 
     }
 }
 
