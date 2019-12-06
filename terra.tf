@@ -9,7 +9,7 @@ terraform {
 
 provider "azurerm" {
   # Whilst version is optional, we /strongly recommend/ using it to pin the version of the Provider being used
-  version = "1.36.0"
+  version = "=1.36.0"
 
 /*  client_id="56734769-eb5d-4ef2-9f3e-63be21d88528"
   client_secret="rYqBPiW8Fo:O/?dA.nciejC8JC8J51X4"
