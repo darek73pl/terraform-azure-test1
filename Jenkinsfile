@@ -2,30 +2,19 @@ pipeline {
     agent any
     
     environment {
-        PATH = "${PATH}:${getTerraformPath()}"
+        ARM_CLIENT_ID="56734769-eb5d-4ef2-9f3e-63be21d88528"
+        ARM_CLIENT_SECRET="rYqBPiW8Fo:O/?dA.nciejC8JC8J51X4"
+        ARM_SUBSCRIPTION_ID="98e03152-0027-41fa-a4af-1b6b1100e212"
+        ARM_TENANT_ID="1c65a708-c899-485d-ad68-d53560fa74ba"
     }
     
     stages {
         stage ('terra-init'){
             steps {
-                withCredentials([azureServicePrincipal(credentialsId: 'Terraform-Azure',
-                                    subscriptionIdVariable: 'SUBS_ID',
-                                    clientIdVariable: 'CLIENT_ID',
-                                    clientSecretVariable: 'CLIENT_SECRET',
-                                    tenantIdVariable: 'TENANT_ID')]) {
-                                         bat 'az login --service-principal -u %CLIENT_ID% -p %CLIENT_SECRET% -t %TENANT_ID%'
-                                         bat "\"${getTerraformPath()}\\terraform\" init"
-
-                }
-                
-                /*bat '''
-                    az login --service-principal -u "56734769-eb5d-4ef2-9f3e-63be21d88528" -p "rYqBPiW8Fo:O/?dA.nciejC8JC8J51X4" -t "1c65a708-c899-485d-ad68-d53560fa74ba"
-                    "C:\\Program Files\\Terraform\\terraform" init 
-                    
-                '''
-                //bat "\"${getTerraformPath()}\\terraform\" init"
-                bat "\"${getTerraformPath()}\\terraform\" plan"
-                bat "\"${getTerraformPath()}\\terraform\" apply -auto-approve" */
+ 
+                bat "\"${getTerraformPath()}\\terraform\" init"
+                //bat "\"${getTerraformPath()}\\terraform\" plan"
+                //bat "\"${getTerraformPath()}\\terraform\" apply -auto-approve" */
             }
         }    
     }
