@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         ARM_CLIENT_ID="56734769-eb5d-4ef2-9f3e-63be21d88528"
-        ARM_CLIENT_SECRET="rYqBPiW8Fo:O/?dA.nciejC8JC8J51X4"
+        ARM_CLIENT_SECRET=credentials('Terraform-Azure-Cient-Secret')
         ARM_SUBSCRIPTION_ID="98e03152-0027-41fa-a4af-1b6b1100e212"
         ARM_TENANT_ID="1c65a708-c899-485d-ad68-d53560fa74ba"
     }
