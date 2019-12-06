@@ -14,6 +14,8 @@ pipeline {
                                     clientSecretVariable: 'CLIENT_SECRET',
                                     tenantIdVariable: 'TENANT_ID')]) {
                                          bat 'az login --service-principal -u %CLIENT_ID% -p %CLIENT_SECRET% -t %TENANT_ID%'
+                                         bat "\"${getTerraformPath()}\\terraform\" init"
+
                 }
                 
                 /*bat '''
