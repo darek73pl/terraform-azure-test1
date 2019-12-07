@@ -1,8 +1,8 @@
 terraform {
   backend "azurerm" {
-    resource_group_name  = "Constant-RG"
-    storage_account_name = "dartest01"
-    container_name       = "terraform-state-jenkins"
+    resource_group_name  = "Terraform-RG"
+    storage_account_name = "terraformstorageaccount1"
+    container_name       = "terraform-state-test1"
     key                  = "terraform.tfstate"
   }
 }

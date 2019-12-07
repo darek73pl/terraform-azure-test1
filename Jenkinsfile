@@ -2,13 +2,21 @@ pipeline {
     agent any
     
     environment {
-        ARM_CLIENT_ID="56734769-eb5d-4ef2-9f3e-63be21d88528"
-        ARM_CLIENT_SECRET=credentials('Terraform-Azure-Cient-Secret')
-        ARM_SUBSCRIPTION_ID="98e03152-0027-41fa-a4af-1b6b1100e212"
-        ARM_TENANT_ID="1c65a708-c899-485d-ad68-d53560fa74ba"
+        ARM_SUBSCRIPTION_ID      = "98e03152-0027-41fa-a4af-1b6b1100e212"
+        ARM_TENANT_ID            = credentials('Terraform-Azure-Tenant_ID')
+        ARM_CLIENT_ID            = credentials('Terraform-Azure-Client_ID')
+        ARM_CLIENT_SECRET        = credentials('Terraform-Azure-Client-Secret')
+        ARM_STATE_CONTAINER_NAME = "terraform-state-test1"
     }
     
     stages {
+        stage ("terra-create-state-container") {
+            steps {
+                script {
+                    createTerraformStorageContainer()
+                }
+            }
+        }
         stage ('terra-init'){
             steps {
                  bat "\"${getTerraformPath()}\\terraform\" init"               
@@ -30,4 +38,10 @@ pipeline {
 def getTerraformPath () {
     def HomeDir = tool name: 'Terraform-12', type: 'org.jenkinsci.plugins.terraform.TerraformInstallation'
     return HomeDir
+}
+
+def createTerraformStorageContainer () {
+    withCredentials([string(credentialsId: 'Terraform-Azure-StorageAccount-Key', variable: 'ACCOUNT_KEY')]) {
+        bat "az storage container create -n %ARM_STATE_CONTAINER_NAME% --account-name terraformstorageacount01 --account-key %ACCOUNT_KEY%"
+    }
 }
