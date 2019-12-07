@@ -41,8 +41,7 @@ def getTerraformPath () {
 }
 
 def createTerraformStorageContainer () {
-    withCredentials([string(credentialsId: 'Terraform-Azure-StorageAccount-Key', variable: 'ACCOUNT_KEY')]) {
-        //bat "az login --service-principal -u %ARM_CLIENT_ID% -p %ARM_CLIENT_SECRET% --tenant %ARM_TENANT_ID%"
-        bat "az storage container create -n %ARM_STATE_CONTAINER_NAME% --connection-string \"%ACCOUNT_KEY%\""
+    withCredentials([string(credentialsId: 'Terraform-Azure-StorageAccount-Connection', variable: 'ACCOUNT_CONNECTION')]) {
+        bat "az storage container create -n %ARM_STATE_CONTAINER_NAME% --connection-string \"%ACCOUNT_CONNECTION%\""
     }
 }
